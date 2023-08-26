@@ -1,0 +1,144 @@
+.formHeading {
+  font-size: 2rem;
+  color: rgba(60, 102, 153, 0.762);
+  text-shadow: 1px 1px 2px solid gray;
+}
+
+.registerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.671);
+}
+.registerLeftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 43%;
+}
+
+.registerLeftContainer img {
+  width: 60%;
+}
+
+.registerRightContainer {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.mergeInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+.registerInput {
+  margin-bottom: 25px;
+  padding: 8px 10px;
+  background-color: #000000c5;
+  color: white;
+  border: none;
+  border-bottom: 1px solid white;
+  width: 100%;
+  margin-right: 9px;
+  outline: none;
+}
+
+.registerBtn {
+  width: 100%;
+  background-color: rgba(60, 102, 153, 0.762);
+  padding: 8px 10px;
+  border-radius: 14px;
+  outline: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-family: Verdana, sans-serif;
+  cursor: pointer;
+}
+
+.registerBtn:hover {
+  background-color: teal;
+}
+
+@media (max-width: 1000px) {
+  .registerRightContainer {
+    width: 60%;
+  }
+  .radioBox {
+    width: 100%;
+  }
+  .radioLabel {
+    font-size: 0.9rem;
+  }
+  .formHeading {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 750px) {
+  .registerContainer {
+    flex-direction: column !important;
+    height: 100%;
+  }
+  .registerLeftContainer {
+    width: 90%;
+  }
+  .registerRightContainer {
+    width: 85%;
+  }
+  .formHeading {
+    font-size: 1.3rem;
+  }
+  .radioBox {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .registerContainer {
+    flex-direction: column !important;
+    height: 100%;
+  }
+  .registerLeftContainer {
+    width: 100%;
+  }
+  .registerRightContainer {
+    width: 95%;
+  }
+  .formHeading {
+    font-size: 0.9rem;
+  }
+  .radioBox {
+    width: 100%;
+  }
+}
+
+@media (max-width: 460px) {
+  .registerContainer {
+    flex-direction: column !important;
+    height: 100%;
+  }
+  .registerLeftContainer {
+    width: 100%;
+  }
+  .registerRightContainer {
+    width: 100%;
+  }
+  .radioContainer {
+    flex-direction: column !important;
+    margin-bottom: 10px;
+  }
+  .formHeading {
+    font-size: 0.7rem;
+  }
+  .radioBox {
+    margin: 5px;
+    width: 100%;
+  }
+  .radioLabel {
+    font-size: 0.9rem;
+  }
+}

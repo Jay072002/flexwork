@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Roboto+Serif:wght@200&display=swap");
+
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  /* font-family: "Montserrat", sans-serif; */
+  font-family: "Roboto Serif", serif;
+}
+
+html {
+  background-color: #000000;
+}
+
+.App {
+  background-color: #000000;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.8);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.scrollbar {
+  overflow-y: scroll;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #2e4e74;
+  border-radius: 10px;
+}

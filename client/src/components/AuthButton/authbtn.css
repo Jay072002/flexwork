@@ -1,0 +1,26 @@
+.authBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 7px;
+  white-space: nowrap;
+}
+
+.authBtn:hover {
+  cursor: pointer;
+}
+
+.authTitle {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-size: 14px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: "Roboto", sans-serif;
+}

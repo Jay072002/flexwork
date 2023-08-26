@@ -1,0 +1,61 @@
+.loginForm {
+  width: 30% !important;
+}
+
+.fa-google {
+  
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.loginContainer {
+  padding-top: 30px;
+  flex-direction: column !important;
+}
+
+@media (max-width: 900px) {
+  .loginForm {
+    width: 40% !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .loginForm {
+    width: 55% !important;
+  }
+  .loginLogo {
+    width: 55% !important;
+  }
+  .formHeading {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .loginForm {
+    width: 75% !important;
+  }
+
+  .loginLogo {
+    width: 75% !important;
+  }
+  .formHeading {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .loginForm {
+    width: 85% !important;
+  }
+
+  .loginLogo {
+    width: 85% !important;
+  }
+
+  .formHeading {
+    font-size: 1.6rem;
+  }
+}
