@@ -10,14 +10,17 @@ const freelancerProfileSchema = new Schema(
       type: String,
       required: [true, "must provide description"],
     },
+
+    // relation with the user table
     userId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       unique: true,
       required: [true, "must provide userId"],
     },
     skills: {
       type: [String],
-      default:[]
+      default: []
     },
   },
   { timestamps: true }

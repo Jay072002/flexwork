@@ -24,8 +24,12 @@ const freelancerExperienceSchema = new Schema(
       type: String,
       default: null,
     },
+
+    // relation with the freelancer profile table
     profileId: {
-      type: String,
+      type: Schema.Types.ObjectId, // Change to ObjectId type
+      ref: "FreelancerProfile", // Reference the FreelancerProfile model
+      unique: true,
       required: [true, "must provide profileId of freelancer"],
     },
   },

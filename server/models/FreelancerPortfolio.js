@@ -24,8 +24,12 @@ const freelancerPortfolioSchema = new Schema(
       type: Date,
       required: [true, "must provide completion date"],
     },
+
+    // relation with the freelancer profile table
     profileId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'FreelancerProfile',
+      unique: true,
       required: [true, "must provide freelancer profileId"],
     },
   },

@@ -2,13 +2,19 @@ const { Schema, default: mongoose } = require("mongoose");
 
 const freelancerWishlistSchema = new Schema(
   {
+
+    // relation with the client project table
     projectId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'ClientProject',
       required: [true, "must provide projectId"],
     },
 
+    // relation withh the user table
     freelancerId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      unique: true,
       required: [true, "must provide freelancerId"],
     },
   },

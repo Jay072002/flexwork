@@ -2,8 +2,11 @@ const { Schema, default: mongoose } = require("mongoose");
 
 const freelancerEducationSchema = new Schema(
   {
+    // relation with the freelancer profile table
     profileId: {
-      type: String,
+      type: Schema.Types.ObjectId, // Change to ObjectId type
+      ref: "FreelancerProfile", // Reference the FreelancerProfile model
+      unique: true,
       required: [true, "must provide freelancer profileId"],
     },
     universityName: {
