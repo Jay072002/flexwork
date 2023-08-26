@@ -1,7 +1,7 @@
 // Import required packages and modules
 
 const express = require("express");
-const dotenv = require("dotenv");
+require("dotenv").config();
 const cors = require("cors");
 const connectDB = require("./db/db");
 const router = require("./routes/index");
@@ -12,8 +12,6 @@ const cookieSession = require("cookie-session");
 require("./service/googleAuth");
 require("./service/linkedInAuth");
 require("./service/githubAuth");
-
-dotenv.config();
 
 const app = express();
 

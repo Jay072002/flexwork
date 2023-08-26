@@ -5,19 +5,16 @@ const NODEMAILER_USER = process.env.NODEMAILER_USER;
 const NODEMAILER_PASS = process.env.NODEMAILER_PASS;
 
 const sendMail = ({ name, email, message }) => {
-  console.log(email);
-  // console.log(NODEMAILER_USER);
-
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: 'securesally@gmail.com',
-      pass: 'xlmdcchzhblsiapu',
+      user: NODEMAILER_USER,
+      pass: NODEMAILER_PASS,
     },
   });
 
   const mailOptions = {
-    from: 'securesally@gmail.com',
+    from: NODEMAILER_USER,
     to: email,
     subject: `Message from ${name}`,
     text: message,
