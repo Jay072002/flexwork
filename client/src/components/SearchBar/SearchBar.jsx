@@ -13,7 +13,7 @@ const SearchBar = ({ placeholder, projects, setProjects }) => {
       .post('api/v1/filter', { searchTerm: query })
       .then(response => {
         console.log(response.data);
-        setProjects(response.data);
+        setProjects(response.data.data);
       })
       .catch(error => {
         console.error("Error filtering projects:", error);
