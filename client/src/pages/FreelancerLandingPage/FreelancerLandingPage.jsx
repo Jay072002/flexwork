@@ -121,7 +121,7 @@ const FreelancerLandingPage = () => {
           <FreelancerLandingTabs></FreelancerLandingTabs>
           {projects?.length !== 0 ? (
             <Box>
-              {projects.map((project, index) => {
+              {projects?.map((project, index) => {
                 return (
                   <ProjectOverview
                     key={index}
