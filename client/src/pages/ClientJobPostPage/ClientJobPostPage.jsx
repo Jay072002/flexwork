@@ -37,6 +37,8 @@ const Form1 = () => {
   const { clientProjectPostDetails, setClientProjectPostDetails } =
     useContext(FlexWorkContext);
 
+  console.log(clientProjectPostDetails);
+
   return (
     <>
       <Box minHeight={"43vh"}>
@@ -354,9 +356,11 @@ export default function ClientJobPostPage() {
   const [step, setStep] = useState(1);
   const [progress, setProgress] = useState(33.33);
   const [isLoading, setIsLoading] = useState(false);
-  const { clientProjectPostDetails, user, setClientProjectPostDetails } =
+  const { clientProfile, clientProjectPostDetails, user, setClientProjectPostDetails } =
     useContext(FlexWorkContext);
+  console.log(clientProfile);
   const navigate = useNavigate();
+  console.log(clientProjectPostDetails);
   const handleSubmit = async () => {
     try {
       if (
@@ -369,9 +373,9 @@ export default function ClientJobPostPage() {
         clientProjectPostDetails.experienceType !== "" &&
         Number(clientProjectPostDetails.projectRate) &&
         clientProjectPostDetails.file !== "" &&
-        clientProjectPostDetails.userId !== ""
+        clientProjectPostDetails.company !== ""
       ) {
-        setIsLoading(true);
+        setIsLoading(true)
         const res = await axios.post(
           "/api/v1/client/project/",
           clientProjectPostDetails
@@ -387,6 +391,7 @@ export default function ClientJobPostPage() {
           experienceType: "fresher",
           projectRate: "",
           file: "",
+          company: clientProfile?.companyName,
         });
         toast({
           title: "Project created.",
@@ -419,11 +424,21 @@ export default function ClientJobPostPage() {
   };
 
   useEffect(() => {
-    setClientProjectPostDetails({
-      ...clientProjectPostDetails,
-      userId: user._id,
-    });
+    const fetchUserProfile = async () => {
+      try {
+
+        setClientProjectPostDetails({
+          ...clientProjectPostDetails,
+          company: clientProfile?.companyName,
+        });
+      } catch (error) {
+        // Handle error
+      }
+    };
+
+    fetchUserProfile();
   }, [user]);
+
 
   return (
     <>

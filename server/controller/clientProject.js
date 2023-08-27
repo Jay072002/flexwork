@@ -6,9 +6,11 @@ const FreelancerProposalRequest = require("../models/FreelancerProposalRequest")
 const createProject = async (req, res) => {
   infoLog("createProject entry");
 
+  console.log(req.body);
   const {
     title,
     description,
+    company,
     category,
     skills,
     scope,
@@ -24,6 +26,7 @@ const createProject = async (req, res) => {
     !title ||
     !description ||
     !category ||
+    !company ||
     !skills ||
     !scope ||
     !experienceType ||
@@ -41,6 +44,7 @@ const createProject = async (req, res) => {
     const newClientProject = new ClientProject({
       title,
       description,
+      company,
       category,
       skills,
       scope,

@@ -10,6 +10,10 @@ const clientProjectSchema = new Schema(
       type: String,
       required: [true, "must provide description"],
     },
+    company: {
+      type: String,
+      default: ""
+    },
     skills: {
       type: [String],
       required: [true, "must provide skills"],

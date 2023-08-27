@@ -33,6 +33,8 @@ const ClientProjectPage = () => {
 
   const [isMobile] = useMediaQuery("(max-width: 500px)");
   const [isTab] = useMediaQuery("(max-width: 950px)");
+  const { clientProfile } = useContext(FlexWorkContext);
+
 
   const [isApplied, setIsApplied] = useState(false);
 
@@ -57,7 +59,7 @@ const ClientProjectPage = () => {
       );
       setRecivedProposals(data?.data?.clientAllProposals);
       setFreelancersData(data?.data?.freelancers);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const publishProject = async () => {
@@ -85,9 +87,6 @@ const ClientProjectPage = () => {
     getParticularProject();
     getLatestFiveProposal();
   }, [refresh]);
-
-  console.log(freelacersData);
-  console.log(recievedProposals);
 
   return (
     <Container maxW={"10xl"} w={isMobile ? "100vw" : "90vw"} my={10}>
@@ -155,11 +154,13 @@ const ClientProjectPage = () => {
                 fontWeight={300}
                 fontSize={isMobile ? "10px" : "1xl"}
                 textAlign={!isMobile && "right"}
-                py={isMobile ? 1 : 2}
+                marginTop={2}
               >
                 Published At {project?.createdAt?.split("T")[0]} On{" "}
                 {project?.createdAt?.split("T")[1].split(".")[0]}
               </Text>
+              <Text color={useColorModeValue("gray.400", "gray.400")}
+                style={{ fontSize: '1rem', letterSpacing: '1px' }}>by {clientProfile?.companyName}</Text>
             </Flex>
             <Text
               alignSelf={"flex-start"}

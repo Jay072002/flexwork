@@ -25,6 +25,7 @@ import axios from "../../utils/axiosInstance";
 
 const ProjectOverview = ({ project, location }) => {
   const [isProjectLiked, setIsProjectLiked] = useState(false);
+  const { clientProfile } = useContext(FlexWorkContext);
 
   const [isMobile] = useMediaQuery("(max-width: 500px)");
   const [isTab] = useMediaQuery("(max-width: 950px)");
@@ -99,6 +100,7 @@ const ProjectOverview = ({ project, location }) => {
                   Created At {project?.createdAt?.split("T")[0]} On{" "}
                   {project?.createdAt.split("T")[1].split(".")[0]}
                 </Text>
+                {!user.isClient && <Text style={{ position: 'absolute', right: '10px', top: '20px', fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '1px' }}>-{project?.company}</Text>}
               </Box>
               {project?.status ? (
                 <Box
@@ -204,6 +206,8 @@ const ProjectOverview = ({ project, location }) => {
         {user.isClient ? "Proposals Received " : "Total Proposals"} :{" "}
         {project?.totalProposals}
       </Text>
+      {user.isClient && <Text style={{ position: 'absolute', right: '10px', bottom: '15px', fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '1px' }}>-{clientProfile?.companyName}</Text>}
+
 
       {!user.isClient && (
         <CardFooter
