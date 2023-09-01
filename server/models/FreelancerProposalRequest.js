@@ -9,17 +9,13 @@ const freelancerProposalRequestSchema = new Schema(
 
     // relation with the user table
     clientId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      unique: true,
+      type: String,
       required: [true, "must provide client id"],
     },
 
     // relation with the user table
     freelancerId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      unique: true,
+      type: String,
       required: [true, "must provide freelancerId"],
     },
     expectedBidRate: {

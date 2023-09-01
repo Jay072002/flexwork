@@ -13,8 +13,7 @@ const freelancerProfileSchema = new Schema(
 
     // relation with the user table
     userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+      type: String,
       unique: true,
       required: [true, "must provide userId"],
     },

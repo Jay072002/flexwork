@@ -27,9 +27,7 @@ const freelancerPortfolioSchema = new Schema(
 
     // relation with the freelancer profile table
     profileId: {
-      type: Schema.Types.ObjectId,
-      ref: 'FreelancerProfile',
-      unique: true,
+      type: String,
       required: [true, "must provide freelancer profileId"],
     },
   },

@@ -5,16 +5,13 @@ const freelancerWishlistSchema = new Schema(
 
     // relation with the client project table
     projectId: {
-      type: Schema.Types.ObjectId,
-      ref: 'ClientProject',
+      type: String,
       required: [true, "must provide projectId"],
     },
 
     // relation withh the user table
     freelancerId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      unique: true,
+      type: String,
       required: [true, "must provide freelancerId"],
     },
   },

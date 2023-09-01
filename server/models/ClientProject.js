@@ -50,9 +50,7 @@ const clientProjectSchema = new Schema(
 
     // relation with the user table
     userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User", // This refers to the "User" model
-      unique: true,
+      type: String,
       required: [true, "must provide userId"],
     },
     isPublished: {

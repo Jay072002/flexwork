@@ -4,9 +4,7 @@ const freelancerEducationSchema = new Schema(
   {
     // relation with the freelancer profile table
     profileId: {
-      type: Schema.Types.ObjectId, // Change to ObjectId type
-      ref: "FreelancerProfile", // Reference the FreelancerProfile model
-      unique: true,
+      type: String,
       required: [true, "must provide freelancer profileId"],
     },
     universityName: {

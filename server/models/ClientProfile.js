@@ -17,8 +17,7 @@ const clientProfileSchema = new Schema(
 
     // relation with the user table
     userId: {
-      type: Schema.Types.ObjectId, // Change to ObjectId type
-      ref: "User", // Reference the User model
+      type: String,
       unique: true,
       required: [true, "must provide userId"],
     },
