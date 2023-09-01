@@ -71,6 +71,13 @@ const ProjectOverview = ({ project, location }) => {
       console.log(error);
     }
   };
+
+  // view client profile 
+
+  const viewClientProfile = () => {
+    navigate(`/client/profile/view/${project?.userId}`)
+  }
+
   return (
     <Card
       bg={"#1a202c"}
@@ -99,7 +106,7 @@ const ProjectOverview = ({ project, location }) => {
                   {project?.createdAt.split("T")[1].split(".")[0]}
                 </Text>
                 {!user.isClient && <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>-{project?.company}</Text>}
-                {!user.isClient && <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>Job Posted By<span style={{ color: "#adaaaa", }}>{" " + project?.clientName}</span></Text>}
+                {!user.isClient && <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>Job Posted By<Button title="view profile" color={"blue.500"} onClick={viewClientProfile} background={"none"} p={2} mb={1} _hover={"none"} >{" " + project?.clientName}</Button></Text>}
               </Box>
               {project?.status ? (
                 <Box

@@ -36,7 +36,7 @@ const FreelancerProfilePage = () => {
         description,
         userId: user._id,
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -44,7 +44,6 @@ const FreelancerProfilePage = () => {
     getProfileData();
   }, [user]);
 
-  console.log(skeletonLoading);
 
   return (
     <Box

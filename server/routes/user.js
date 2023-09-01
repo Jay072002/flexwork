@@ -1,6 +1,7 @@
 const {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
+  verifyToken,
 } = require("../middleware/verifyToken");
 
 const {
@@ -20,7 +21,7 @@ router.put(
   updateUser
 );
 router.delete("/:userId", verifyTokenAndAuthorization, removeUser);
-router.get("/:userId", verifyTokenAndAuthorization, getUser);
+router.get("/:userId", verifyToken, getUser);
 router.get("/", verifyTokenAndAdmin, getUsers);
 
 module.exports = router;

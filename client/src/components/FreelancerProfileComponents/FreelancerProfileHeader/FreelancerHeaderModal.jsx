@@ -12,7 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 import axios from "../../../utils/axiosInstance";
@@ -23,11 +23,16 @@ const FreelancerHeaderModal = ({
   isOpen,
   onClose,
 }) => {
+
   const initialRef = React.useRef(null);
   const userId = localStorage.getItem("userId");
 
   const handleSubmit = async (e) => {
+
+    onClose()
+
     e.preventDefault();
+
     try {
       const formData = new FormData();
       formData.append("file", freelancerPersonalDetails.file);
@@ -161,7 +166,7 @@ const FreelancerHeaderModal = ({
               <Button
                 style={{ background: "#2e4e74" }}
                 type="submit"
-                onClick={onClose}
+                onClick={handleSubmit}
                 mr={3}
               >
                 Save

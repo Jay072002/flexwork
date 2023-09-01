@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { BiCheckCircle } from "react-icons/bi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectProposalModal from "../../components/ProjectProposal/ProjectProposalModal";
 import ProposalOverview from "../../components/ProjectProposal/ProposalOverview";
 import { FlexWorkContext } from "../../context/ContextStore";
@@ -60,6 +60,7 @@ const ClientProjectPage = () => {
     } catch (error) { }
   };
 
+
   const publishProject = async () => {
     try {
       const res = await axios.put(`/api/v1/client/project/${project._id}`, {
@@ -85,6 +86,12 @@ const ClientProjectPage = () => {
     getParticularProject();
     getLatestFiveProposal();
   }, [refresh]);
+
+  const navigate = useNavigate()
+
+  const viewClientProfile = () => {
+    navigate(`/client/profile/view/${project?.userId}`)
+  }
 
   return (
     <Container maxW={"10xl"} w={isMobile ? "100vw" : "90vw"} my={10}>
@@ -157,8 +164,11 @@ const ClientProjectPage = () => {
                 Published At {project?.createdAt?.split("T")[0]} On{" "}
                 {project?.createdAt?.split("T")[1].split(".")[0]}
               </Text>
+
+
               <Text color={useColorModeValue("gray.400", "gray.400")}
                 style={{ fontSize: '1rem', letterSpacing: '1px' }}>by {project?.company}</Text>
+              {!user.isClient && <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>Job Posted By<Button title="view profile" color={"blue.500"} onClick={viewClientProfile} background={"none"} p={2} mb={1} _hover={"none"} >{" " + project?.clientName}</Button></Text>}
             </Flex>
             <Text
               alignSelf={"flex-start"}

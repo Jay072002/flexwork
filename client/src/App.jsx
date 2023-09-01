@@ -26,6 +26,8 @@ import RegisterOption from "./pages/RegisterOption/RegisterOption";
 import ClientProjectPage from "./pages/ClientProjectPage/ClientProjectPage";
 import NotFound from "./pages/404Page/NotFound";
 import ClientAllProposalsPage from "./pages/ClientAllProposalsPage/ClientAllProposalsPage";
+import ClientProfileView from "./pages/ClientProfileView/ClientProfileView";
+import FreelancerProfileView from "./pages/FreelancerProfileView/FreelancerProfileView";
 
 const App = () => {
   const navigate = useNavigate();
@@ -222,6 +224,18 @@ const App = () => {
                 isUserClient={isUserClient}
                 setUser={setUser}
               />
+            }
+          />
+          <Route
+            path="/client/profile/view/:clientUserId"
+            element={
+              isLogin ? <ClientProfileView /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="/freelancer/profile/view/:freelancerUserId"
+            element={
+              isLogin ? <FreelancerProfileView /> : <Navigate to="/login" />
             }
           />
 

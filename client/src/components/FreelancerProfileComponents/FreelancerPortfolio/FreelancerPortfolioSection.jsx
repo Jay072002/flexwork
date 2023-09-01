@@ -41,7 +41,6 @@ const FreelancerPortfolioSection = () => {
         `/api/v1/freelancer/portfolio/${freelancerProfile?._id}`
       );
 
-      console.log(data.data);
       setFreelancerPortfolios(data.data);
 
       if (data.data.length > 0) {
@@ -50,8 +49,7 @@ const FreelancerPortfolioSection = () => {
         setIsData(false);
       }
 
-      setFreelancerPortfolios(data.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const deletePortfolio = async (portfolioId) => {

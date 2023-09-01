@@ -13,8 +13,8 @@ const updateUser = async (req, res) => {
 
     const params = {
       Bucket: "flexworkdata",
-      Key: "profile/" + Date.now() + file.originalname,
-      Body: file.buffer,
+      Key: "profile/" + Date.now() + file?.originalname,
+      Body: file?.buffer,
       ACL: "public-read",
     };
 
@@ -48,6 +48,7 @@ const updateUser = async (req, res) => {
     infoLog("updateUser exit");
     return res.status(200).json({ isUserUpdated: true, data: user });
   } catch (error) {
+    console.log(error);
     infoLog("updateUser exit");
     errorLog("Error While updating user profile!");
     return res.status(500).json({ isUserUpdated: false, data: {} });

@@ -32,6 +32,9 @@ const FreelancerProfileHeader = () => {
     file: "",
   });
 
+  console.log("freelancer data", freelancerPersonalDetails);
+  console.log(user, "user")
+
   useEffect(() => {
     setFreelancerPersonalDetails({
       firstName: user?.firstName ? user.firstName : "",
@@ -85,10 +88,10 @@ const FreelancerProfileHeader = () => {
               <Stack direction={"row"}>
                 <Heading fontWeight={"semibold"} size="lg">
                   {freelancerPersonalDetails.firstName ||
-                  freelancerPersonalDetails?.lastName
+                    freelancerPersonalDetails?.lastName
                     ? freelancerPersonalDetails.firstName +
-                      " " +
-                      freelancerPersonalDetails.lastName
+                    " " +
+                    freelancerPersonalDetails.lastName
                     : "Edit your name"}
                 </Heading>
                 <MdModeEdit
@@ -126,8 +129,8 @@ const FreelancerProfileHeader = () => {
                 <GoLocation />
                 <Text color={"gray.300"}>
                   {" "}
-                  {freelancerPersonalDetails.city},{" "}
-                  {freelancerPersonalDetails.state}
+                  {freelancerPersonalDetails?.city},{" "}
+                  {freelancerPersonalDetails?.state}
                 </Text>
               </Flex>
             )}

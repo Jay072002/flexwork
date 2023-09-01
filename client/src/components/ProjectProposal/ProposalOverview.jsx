@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import {
   Avatar,
@@ -28,6 +28,8 @@ const ProposalOverview = ({ freelancer, proposal }) => {
   const [isMore, setIsMore] = useState(false);
   const { setRefresh } = useContext(FlexWorkContext);
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(freelancer, "freelancer");
 
   const { id: projectId } = useParams();
 
@@ -74,13 +76,11 @@ const ProposalOverview = ({ freelancer, proposal }) => {
     }
   };
 
-  // const viewProfile = async () => {
-  //   return navigate("/freelancer/profile", {
-  //     state: {
-  //       freelancer,
-  //     },
-  //   });
-  // };
+  const navigate = useNavigate()
+
+  const viewFreelancerProfile = async () => {
+    navigate(`/freelancer/profile/view/${freelancer?._id}`)
+  };
 
   return (
     <Card
@@ -91,8 +91,8 @@ const ProposalOverview = ({ freelancer, proposal }) => {
       border={"1px solid gray"}
     >
       <CardHeader>
-        <Flex flexDir={isMobile && "column"} spacing="2">
-          <Flex flex="1" gap="3" alignItems="center" flexWrap="wrap">
+        <Flex title="view profile" onClick={viewFreelancerProfile} cursor={"pointer"} flexDir={isMobile && "column"} spacing="2">
+          <Flex flex="1" gap="3" alignItems="center" flexWrap="wrap" onClick={viewFreelancerProfile}>
             <Avatar
               size={isMobile ? "sm" : "md"}
               src={freelancer?.profileImg}
