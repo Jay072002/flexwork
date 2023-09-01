@@ -61,6 +61,7 @@ const ProjectOverview = ({ project, location }) => {
       console.log(error);
     }
   };
+
   const deleteHandler = async () => {
     try {
       const res = await axios.post(
@@ -77,6 +78,29 @@ const ProjectOverview = ({ project, location }) => {
   const viewClientProfile = () => {
     navigate(`/client/profile/view/${project?.userId}`)
   }
+
+
+  // add and remove wishlist project 
+  const handleLikeButton = async () => {
+    try {
+
+      if (isProjectLiked) {
+        // add to wishlist
+
+        await axios.post('/api/v1/freelancer/wishlist', project)
+
+      } else {
+        // remove from wishlist
+      }
+
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    handleLikeButton()
+  }, [isProjectLiked])
 
   return (
     <Card

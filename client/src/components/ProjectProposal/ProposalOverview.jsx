@@ -91,8 +91,8 @@ const ProposalOverview = ({ freelancer, proposal }) => {
       border={"1px solid gray"}
     >
       <CardHeader>
-        <Flex title="view profile" onClick={viewFreelancerProfile} cursor={"pointer"} flexDir={isMobile && "column"} spacing="2">
-          <Flex flex="1" gap="3" alignItems="center" flexWrap="wrap" onClick={viewFreelancerProfile}>
+        <Flex flexDir={isMobile && "column"} spacing="2">
+          <Flex title="view profile" onClick={viewFreelancerProfile} cursor={"pointer"} flex="1" gap="3" alignItems="center" flexWrap="wrap" >
             <Avatar
               size={isMobile ? "sm" : "md"}
               src={freelancer?.profileImg}

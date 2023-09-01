@@ -8,6 +8,7 @@ const clientProfile = require("./clientProfle");
 const clientProject = require("./clientProject");
 const clientProposalsReceived = require("./clientProposalsReceived");
 const freelancerProposalRequest = require("./freelancerProposalRequest");
+const freelancerWishlistProject = require("./freelancerWishlistProject");
 const filter = require("./filter")
 const userRouter = require("./user");
 
@@ -31,5 +32,8 @@ router.use("/client/proposal", clientProposalsReceived);
 
 // filter API
 router.use("/filter", filter)
+
+// freelancer wishlist project
+router.use("/freelancer/wishlist", freelancerWishlistProject)
 
 module.exports = router;
