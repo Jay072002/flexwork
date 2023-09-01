@@ -1,23 +1,36 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { Flex, IconButton, Input } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import instance from "../../utils/axiosInstance";
+import { useLocation } from "react-router-dom";
+import axios from "../../utils/axiosInstance";
+import { FlexWorkContext } from "../../context/ContextStore";
 
 const SearchBar = ({ placeholder, projects, setProjects }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [debounceTimer, setDebounceTimer] = useState(null);
 
-  const handleSearchQuery = (query) => {
-    instance
-      .post('api/v1/filter', { searchTerm: query })
-      .then(response => {
-        console.log(response.data);
-        setProjects(response.data.data);
-      })
-      .catch(error => {
-        console.error("Error filtering projects:", error);
-      });
+  const location = useLocation();
+
+  const handleSearchQuery = async (query) => {
+
+
+    if (!query && location.search.split("?")[1] == 'bestmatch') {
+      const { data } = await axios.get("/api/v1/client/project?bestmatch=true");
+      setProjects(data?.data);
+    } else {
+
+      instance
+        .post(`api/v1/filter`, { searchTerm: query })
+        .then(response => {
+          setProjects(response?.data?.data);
+        })
+        .catch(error => {
+          console.error("Error filtering projects:", error);
+        });
+    }
+
   };
 
   const handleInputChange = (e) => {

@@ -53,6 +53,9 @@ const ProjectProposalModal = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("cameeee hereeeee");
+
     try {
       if (
         freelancerProposal.clientId !== "" &&
@@ -63,10 +66,13 @@ const ProjectProposalModal = ({
         freelancerProposal.expectedBidRate !== 0
       ) {
         setisLoading(true);
-        const res = await axios.post(
+        const data = await axios.post(
           "/api/v1/freelancer/proposal",
           freelancerProposal
         );
+
+        console.log(data, "jasbbfasifsiafiasgfigasfia");
+
 
         setFreelancerProposal({
           projectId: "",
