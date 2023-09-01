@@ -18,7 +18,7 @@ const ClientLandingPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user, clientProfile, setClientProfile, refresh } =
+  const { user, clientProfile, setClientProfile, refresh, clientProjectPostDetails, setClientProjectPostDetails } =
     useContext(FlexWorkContext);
 
   // fetch the client profile data and set it to context
@@ -90,6 +90,13 @@ const ClientLandingPage = () => {
   };
 
   useEffect(() => {
+
+    let clientName = user?.firstName + " " + user?.lastName;
+    setClientProjectPostDetails((prevDetails) => ({
+      ...prevDetails,
+      clientName,
+    }));
+
     if (
       location.search.split("?")[1] == "draft" ||
       location.search.split("?")[1] == "published"
@@ -124,13 +131,13 @@ const ClientLandingPage = () => {
             flex={2}
             m={isMobile ? 1 : 5}
             p={isMobile ? 1 : 10}
-            bg={"#1a202c"}  
+            bg={"#1a202c"}
             rounded={"2xl"}
             roundedTopRight={0}
             roundedBottomRight={0}
             className="scrollbar"
           >
-            <SearchBar placeholder={"Search for Jobs..."}/>
+            <SearchBar placeholder={"Search for Jobs..."} />
             <ClientLandingTabs></ClientLandingTabs>
             {clientProjects.length ? (
               <>
@@ -140,9 +147,8 @@ const ClientLandingPage = () => {
               </>
             ) : (
               <Stack justify={"center"} h={"100%"} align={"center"}>
-                <Heading color={"white"} size={"lg"}>{`No ${
-                  location.search.split("?")[1]
-                } Projects`}</Heading>
+                <Heading color={"white"} size={"lg"}>{`No ${location.search.split("?")[1]
+                  } Projects`}</Heading>
               </Stack>
             )}
           </Box>

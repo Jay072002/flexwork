@@ -31,13 +31,11 @@ import axios from "../../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const Form1 = () => {
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
 
   const { clientProjectPostDetails, setClientProjectPostDetails } =
     useContext(FlexWorkContext);
 
-  console.log(clientProjectPostDetails);
+  console.log(clientProjectPostDetails, "clinett");
 
   return (
     <>
@@ -102,6 +100,7 @@ const Form1 = () => {
 const Form2 = () => {
   const { clientProjectPostDetails, setClientProjectPostDetails } =
     useContext(FlexWorkContext);
+
   return (
     <>
       <Box minHeight={"43vh"}>
@@ -358,11 +357,13 @@ export default function ClientJobPostPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { clientProfile, clientProjectPostDetails, user, setClientProjectPostDetails } =
     useContext(FlexWorkContext);
-  console.log(clientProfile);
   const navigate = useNavigate();
-  console.log(clientProjectPostDetails);
+
   const handleSubmit = async () => {
     try {
+
+      console.log(clientProjectPostDetails, "clienttttt");
+
       if (
         clientProjectPostDetails.title !== "" &&
         clientProjectPostDetails.description !== "" &&

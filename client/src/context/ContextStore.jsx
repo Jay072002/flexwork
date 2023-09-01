@@ -35,6 +35,7 @@ const FlexWorkContextProvider = ({ children }) => {
     file: "",
     userId: "",
     company: "",
+    clientName: ""
   });
 
   const [refresh, setRefresh] = useState(0);

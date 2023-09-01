@@ -10,6 +10,10 @@ const clientProjectSchema = new Schema(
       type: String,
       required: [true, "must provide description"],
     },
+    clientName: {
+      type: String,
+      default: ""
+    },
     company: {
       type: String,
       default: ""

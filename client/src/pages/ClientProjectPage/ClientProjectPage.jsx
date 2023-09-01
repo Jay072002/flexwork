@@ -32,8 +32,6 @@ const ClientProjectPage = () => {
   const [freelacersData, setFreelancersData] = useState([]);
 
   const [isMobile] = useMediaQuery("(max-width: 500px)");
-  const [isTab] = useMediaQuery("(max-width: 950px)");
-  const { clientProfile } = useContext(FlexWorkContext);
 
 
   const [isApplied, setIsApplied] = useState(false);
@@ -160,7 +158,7 @@ const ClientProjectPage = () => {
                 {project?.createdAt?.split("T")[1].split(".")[0]}
               </Text>
               <Text color={useColorModeValue("gray.400", "gray.400")}
-                style={{ fontSize: '1rem', letterSpacing: '1px' }}>by {clientProfile?.companyName}</Text>
+                style={{ fontSize: '1rem', letterSpacing: '1px' }}>by {project?.company}</Text>
             </Flex>
             <Text
               alignSelf={"flex-start"}

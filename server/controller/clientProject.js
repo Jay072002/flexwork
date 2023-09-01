@@ -18,6 +18,7 @@ const createProject = async (req, res) => {
     experienceType,
     projectRate,
     file,
+    clientName
   } = req.body;
 
   const { id: userId } = req.user;
@@ -33,7 +34,8 @@ const createProject = async (req, res) => {
     !file ||
     !userId ||
     !duration ||
-    !projectRate
+    !projectRate ||
+    !clientName
   ) {
     infoLog("createProject exit");
     res.status(400).json({ isProjectCreated: false, data: {} });
@@ -53,6 +55,7 @@ const createProject = async (req, res) => {
       projectRate: Number(projectRate),
       file,
       userId,
+      clientName
     });
 
     const data = await newClientProject.save();
