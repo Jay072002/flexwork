@@ -1,4 +1,4 @@
-const { createWishlistProject, getWishlistProject } = require("../controller/freelancerWishlistProject");
+const { createWishlistProject, getWishlistProject, deleteWishlistProject } = require("../controller/freelancerWishlistProject");
 const { verifyTokenAndFreelancer, verifyTokenAndAuthorization } = require("../middleware/verifyToken");
 
 const router = require("express").Router();
@@ -6,12 +6,12 @@ const router = require("express").Router();
 
 
 // create a wishlist project
-router.post("/", verifyTokenAndAuthorization, createWishlistProject);
+router.post("/", verifyTokenAndFreelancer, createWishlistProject);
 
 // get all wishlist project
-router.get("/", verifyTokenAndAuthorization, getWishlistProject);
+router.get("/", verifyTokenAndFreelancer, getWishlistProject);
 
 // delete wishlist project
-router.delete("/:wishlistId", verifyTokenAndAuthorization,)
+router.delete("/:projectId", verifyTokenAndFreelancer, deleteWishlistProject)
 
 module.exports = router;

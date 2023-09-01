@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 export const FlexWorkContext = createContext();
 
@@ -40,6 +40,21 @@ const FlexWorkContextProvider = ({ children }) => {
 
   const [refresh, setRefresh] = useState(0);
 
+
+  const [likedProjects, setLikedProjects] = useState([]);
+
+  // Function to toggle like status of a project
+  const toggleLike = useCallback(
+    (projectId) => {
+      setLikedProjects((prevLikedProjects) =>
+        prevLikedProjects.includes(projectId)
+          ? prevLikedProjects.filter((id) => id !== projectId)
+          : [...prevLikedProjects, projectId]
+      );
+    },
+    []
+  );
+
   return (
     <FlexWorkContext.Provider
       value={{
@@ -55,6 +70,9 @@ const FlexWorkContextProvider = ({ children }) => {
         setClientProjectPostDetails,
         skeletonLoading,
         setSkeletonLoading,
+        likedProjects,
+        setLikedProjects,
+        toggleLike
       }}
     >
       {children}

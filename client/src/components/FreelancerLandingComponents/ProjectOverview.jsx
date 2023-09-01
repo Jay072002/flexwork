@@ -1,4 +1,9 @@
-import { ViewIcon } from "@chakra-ui/icons";
+import React, { useContext, useEffect, useState } from "react";
+import { AiFillHeart } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { FlexWorkContext } from "../../context/ContextStore";
+import axios from "../../utils/axiosInstance";
+
 import {
   Box,
   Button,
@@ -9,26 +14,17 @@ import {
   Flex,
   HStack,
   Heading,
-  Icon,
   Tag,
   TagLabel,
   Text,
-  Textarea,
-  Stack,
   useMediaQuery,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect, useState } from "react";
-import { AiFillHeart } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
-import { FlexWorkContext } from "../../context/ContextStore";
-import axios from "../../utils/axiosInstance";
 
-const ProjectOverview = ({ project, location }) => {
-  const [isProjectLiked, setIsProjectLiked] = useState(false);
-
+const ProjectOverview = ({ project, location, setKey }) => {
   const [isMobile] = useMediaQuery("(max-width: 500px)");
+  const { user, setRefresh, likedProjects, toggleLike, setLikedProjects } = useContext(FlexWorkContext);
+  const isProjectLiked = likedProjects.some(likedProject => likedProject._id === project._id);
 
-  const { user, setRefresh } = useContext(FlexWorkContext);
   let statusColor = "red";
   if (project?.status === "Accepted") {
     statusColor = "green";
@@ -48,9 +44,10 @@ const ProjectOverview = ({ project, location }) => {
       });
       setRefresh(Math.random() * 6000000);
     } catch (error) {
-      console.log(error);
+      console.error("Error in publishProject:", error);
     }
   };
+
   const unpublishProject = async () => {
     try {
       const res = await axios.put(`/api/v1/client/project/${project._id}`, {
@@ -58,7 +55,7 @@ const ProjectOverview = ({ project, location }) => {
       });
       setRefresh(Math.random() * 6000000);
     } catch (error) {
-      console.log(error);
+      console.error("Error in unpublishProject:", error);
     }
   };
 
@@ -69,38 +66,53 @@ const ProjectOverview = ({ project, location }) => {
       );
       setRefresh(Math.random() * 6000000);
     } catch (error) {
-      console.log(error);
+      console.error("Error in deleteHandler:", error);
     }
   };
 
-  // view client profile 
-
   const viewClientProfile = () => {
-    navigate(`/client/profile/view/${project?.userId}`)
-  }
+    navigate(`/client/profile/view/${project?.userId}`);
+  };
 
-
-  // add and remove wishlist project 
   const handleLikeButton = async () => {
     try {
-
       if (isProjectLiked) {
-        // add to wishlist
-
-        await axios.post('/api/v1/freelancer/wishlist', project)
+        await axios.delete(`/api/v1/freelancer/wishlist/${project?._id}`);
+        toggleLike(project._id);
 
       } else {
-        // remove from wishlist
+        await axios.post('/api/v1/freelancer/wishlist', { projectId: project?._id, freelancerId: user._id });
+        toggleLike(project._id);
       }
+      // Update the key to trigger a re-render
+      setKey((prevKey) => prevKey + 1);
+      setRefresh(Math.random() * 6000000);
+    } catch (error) {
+      console.error("Error in handleLikeButton:", error);
+    }
+  };
+
+  useEffect(() => {
+    setRefresh(Math.random() * 6000000);
+  }, [likedProjects]);
+
+  const fetchLikedProject = async () => {
+    try {
+      const data = await axios.get(`/api/v1/freelancer/wishlist?freelancerId=${user._id}`)
+      const filteredProjects = data?.data?.data?.map((item) => {
+        return item.projectId
+      })
+
+      setLikedProjects(filteredProjects)
+      setRefresh(Math.random() * 6000000);
 
     } catch (error) {
 
     }
   }
-
   useEffect(() => {
-    handleLikeButton()
-  }, [isProjectLiked])
+    fetchLikedProject()
+  }, [])
 
   return (
     <Card
@@ -129,8 +141,19 @@ const ProjectOverview = ({ project, location }) => {
                   Created At {project?.createdAt?.split("T")[0]} On{" "}
                   {project?.createdAt.split("T")[1].split(".")[0]}
                 </Text>
-                {!user.isClient && <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>-{project?.company}</Text>}
-                {!user.isClient && <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>Job Posted By<Button title="view profile" color={"blue.500"} onClick={viewClientProfile} background={"none"} p={2} mb={1} _hover={"none"} >{" " + project?.clientName}</Button></Text>}
+                {!user.isClient && (
+                  <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>
+                    -{project?.company}
+                  </Text>
+                )}
+                {!user.isClient && (
+                  <Text style={{ fontSize: '1rem', marginTop: '1rem', fontWeight: 'bold', letterSpacing: '1px' }}>
+                    Job Posted By
+                    <Button title="view profile" color={"blue.500"} onClick={viewClientProfile} background={"none"} p={2} mb={1} _hover={"none"}>
+                      {" " + project?.clientName}
+                    </Button>
+                  </Text>
+                )}
               </Box>
               {project?.status ? (
                 <Box
@@ -236,8 +259,11 @@ const ProjectOverview = ({ project, location }) => {
         {user.isClient ? "Proposals Received " : "Total Proposals"} :{" "}
         {project?.totalProposals}
       </Text>
-      {user.isClient && <Text style={{ position: 'absolute', right: '10px', bottom: '15px', fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '1px' }}>-{project?.company}</Text>}
-
+      {user.isClient && (
+        <Text style={{ position: 'absolute', right: '10px', bottom: '15px', fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '1px' }}>
+          -{project?.company}
+        </Text>
+      )}
 
       {!user.isClient && (
         <CardFooter
@@ -275,7 +301,7 @@ const ProjectOverview = ({ project, location }) => {
                 variant="unstyled"
                 colorScheme="pink"
                 fontSize={isMobile && "12px"}
-                onClick={(e) => setIsProjectLiked(!isProjectLiked)}
+                onClick={handleLikeButton}
               >
                 {isProjectLiked ? (
                   <AiFillHeart color="#E90064" />
@@ -296,9 +322,9 @@ const ProjectOverview = ({ project, location }) => {
                 }}
                 colorScheme="blue"
                 onClick={handleClick}
-                isDisabled={location == "applied" ? true : false}
+                isDisabled={location === "applied"}
               >
-                {location == "applied" ? "Applied" : "Apply Now"}
+                {location === "applied" ? "Applied" : "Apply Now"}
               </Button>
             </>
           )}

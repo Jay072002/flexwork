@@ -13,11 +13,12 @@ const FreelancerLandingPage = () => {
   const [isMobile] = useMediaQuery("(max-width: 500px)");
   const [isTab] = useMediaQuery("(max-width: 950px)");
   const [projects, setProjects] = useState([]);
-
   const location = useLocation();
 
-  const { setFreelancerProfile, refresh, user, freelancerProfile } =
+  const { setFreelancerProfile, refresh, user, freelancerProfile, likedProjects } =
     useContext(FlexWorkContext);
+
+  const [key, setKey] = useState(0);
 
   const navigate = useNavigate();
 
@@ -71,13 +72,19 @@ const FreelancerLandingPage = () => {
   // get saved projects
   const getSavedProjects = async () => {
     try {
-      const { data } = await axios.get("/api/v1/client/project?saved=true");
-      setProjects(data.data);
+      const { data } = await axios.get(`/api/v1/freelancer/wishlist?freelancerId=${user._id}`);
+      console.log(data, "asfsa");
+      const mapProjects = data?.data?.map((item) => {
+        return item.projectId
+      })
+      console.log(mapProjects, "mao");
+      setProjects(mapProjects)
+
+
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(projects, 'projects');
   useEffect(() => {
     if (
       location.search.split("?")[1] == "recent" ||
@@ -87,6 +94,7 @@ const FreelancerLandingPage = () => {
       navigate("/freelancer?bestmatch");
     }
   }, []);
+
 
   useEffect(() => {
     setFreelancerProfile({ ...freelancerProfile, userId: user._id });
@@ -124,7 +132,8 @@ const FreelancerLandingPage = () => {
               {projects?.map((project, index) => {
                 return (
                   <ProjectOverview
-                    key={index}
+                    key={`${project._id}-${key}`}
+                    setKey={setKey}
                     project={project}
                     location={location.search.split("?")[1]}
                   />
